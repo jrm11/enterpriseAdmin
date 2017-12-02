@@ -7,35 +7,6 @@
     flex-direction: column;
   }
 
-  .header {
-    padding: 0 15px;
-  }
-
-  .header, .footer {
-    background-color: #333;
-    color: #fff;
-  }
-
-  /*菜单图标*/
-  .menu {
-    margin-top: 14px;
-    margin-left: 80px;
-  }
-
-  .header {
-    line-height: 60px;
-    flex: 0 0 60px;
-  }
-
-  /*全屏图标*/
-  .screen-full {
-    margin-top: 14px;
-  }
-
-  .footer {
-    line-height: 50px;
-    flex: 0 0 50px;
-  }
 
   /*主体*/
   .main {
@@ -52,20 +23,12 @@
     flex: 1;
   }
 
-  .main-header {
-    height: 60px;
-    line-height: 60px;
-    background-color: #fff;
-    border-bottom: 1px solid #ddd;
-    text-align: right;
-    padding: 0 15px;
-  }
 
   /*左侧栏*/
   .slider {
     width: 260px;
     background-color: #2c343f;
-    order: -1;
+    /*order: -1;*/
   }
 
   /*覆盖树形菜单样式*/
@@ -82,104 +45,112 @@
   /*树形菜单三角符号*/
   .el-tree-node__expand-icon {
     font-size: 18px;
-    margin-left:10px;
+    margin-left: 10px;
   }
 
   /*树形菜单hover 背景色*/
   .el-tree-node:focus > .el-tree-node__content, .el-tree-node__content:hover {
-    background-color: #2d243f;
+    background-color: #5b6f8c;
+    border-bottom: 1px solid #677d9e;
   }
 
   /*树形菜单hover 高度*/
   .el-tree-node__content {
     height: 40px;
   }
+  /*修改表单样式*/
+  .el-input__inner{
+    height: 34px;
+  }
+  .el-input__inner,.el-textarea__inner{
+    background-color: transparent;
+    border:none;
+    border-radius: 0;
+    box-shadow: 0 1px 0 #ddd;
+    transition: .3s;
+    padding:0;
+  }
+  .el-form-item__content{
+    line-height: 34px;
+  }
+  .el-form-item__label{
+    line-height: 24px;
+  }
+  .el-form-item{
+    margin-bottom:10px;
+  }
+
+  .el-input__inner:focus,.el-textarea__inner:focus {
+     box-shadow: 0 2px 0 #5b6f8c;
+   }
+
 </style>
 <template>
   <div class="index">
-    <header class="header">
-      <router-link to="/index">
-        <img src="../assets/images/logo.png" alt="" class="fl">
-        <img src="../assets/images/menu.svg" alt="" class="fl menu">
-        <div class="fr">
-          <el-button>全屏</el-button>
-          <el-button><i class="el-icon-rank mr5"></i>部门排序</el-button>
-          <el-button><i class="el-icon-download mr5"></i>导出</el-button>
-          <el-button><i class="el-icon-upload2 mr5"></i>导入</el-button>
-          <el-dropdown split-button type="primary" trigger="click" class="ml10">
-            name
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item><i class="el-icon-edit"></i>修改密码</el-dropdown-item>
-              <el-dropdown-item><i class="el-icon-edit"></i>退出登录</el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
-        </div>
-      </router-link>
-    </header>
+    <header-top></header-top>
     <div class="main">
       <div class="slider">
         <el-tree
-          :data="data"
+          :data="data4"
           :props="defaultProps"
-          accordion
-          @node-click="handleNodeClick">
+          node-key="id"
+          accordion>
         </el-tree>
       </div>
-      <div class="slider-right">
-        <header class="main-header">
-          <el-button size="small" type="primary">公用账号管理</el-button>
-          <el-button size="small" type="primary">添加子公司</el-button>
-          <el-button size="small" type="primary">添加部门</el-button>
-          <el-button size="small" type="primary">添加成员</el-button>
-          <el-button size="small" type="danger">批量管理</el-button>
-        </header>
-      </div>
 
+      <div class="slider-right">
+       <main-header></main-header>
+      </div>
     </div>
-    <footer class="footer">
-      &copy粤2017-2018
-    </footer>
+
+    <footer-bottom></footer-bottom>
+
   </div>
 </template>
-
 <script>
+  import headerTop from '@/component/header'
+  import footerBottom from '@/component/footer'
+  import mainHeader from '@/component/main-header'
+
+  let id = 1000
   export default {
     data () {
       return {
+
         mainHeight: document.body.clientHeight || document.documentElement.clientHeight,
-        data: [{
+        data4: [{
+          id: 1,
           label: '一级 1',
           children: [{
+            id: 4,
             label: '二级 1-1',
             children: [{
+              id: 9,
               label: '三级 1-1-1'
+            }, {
+              id: 10,
+              label: '三级 1-1-2'
             }]
           }]
         }, {
+          id: 2,
           label: '一级 2',
           children: [{
-            label: '二级 2-1',
-            children: [{
-              label: '三级 2-1-1'
-            }]
+            id: 5,
+            label: '二级 2-1'
           }, {
-            label: '二级 2-2',
-            children: [{
-              label: '三级 2-2-1'
-            }]
+            id: 6,
+            label: '二级 2-2'
           }]
         }, {
+          id: 3,
           label: '一级 3',
           children: [{
-            label: '二级 3-1',
-            children: [{
-              label: '三级 3-1-1'
-            }]
+            id: 7,
+            label: '二级 3-1'
           }, {
-            label: '二级 3-2',
-            children: [{
-              label: '三级 3-2-1'
-            }]
+            id: 8,
+            label: '二级 3-2'
           }]
         }],
         defaultProps: {
@@ -188,12 +159,44 @@
         }
       }
     },
+    components: {
+      headerTop,
+      footerBottom,
+      mainHeader
+    },
     mounted () {
       document.querySelector(".main").style.height = this.mainHeight - 110 + "px"
     },
     methods: {
-      handleNodeClick(data) {
+      handleNodeClick (data) {
         console.log(data)
+      },
+      handleCheckChange () {
+//        console.log("节点选中状态发生变化时的回调")
+      },
+      handleCurrentChange () {
+//        console.log("当前选中节点变化时触发的事件")
+      },
+      handleNodeExpand () {
+//        console.log("节点被展开时触发的事件")
+      },
+      handleNodeCollapse () {
+//        console.log("节点被关闭时触发的事件")
+      },
+      append (data) {
+        console.log(data.children)
+        const newChild = {id: id++, label: 'testtest', children: []}
+        if (!data.children) {
+          this.$set(data, 'children', [])
+        }
+        data.children.push(newChild)
+      },
+
+      remove (node, data) {
+        const parent = node.parent
+        const children = parent.data.children || parent.data
+        const index = children.findIndex(d => d.id === data.id)
+        children.splice(index, 1)
       }
     }
   }

@@ -1,0 +1,9 @@
+
+.el-dialog__header {
+background: #409EFF;
+color: #fff;
+}
+
+.el-dialog__title, .el-icon-close:before {
+color: #fff;
+}
