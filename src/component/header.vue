@@ -12,7 +12,7 @@
           name
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item><i class="el-icon-edit"></i>修改密码</el-dropdown-item>
-            <el-dropdown-item><i class="el-icon-edit"></i>退出登录</el-dropdown-item>
+            <el-dropdown-item @click.native="loginOut"><i class="el-icon-edit"></i>退出登录</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </div>
@@ -21,11 +21,16 @@
 </template>
 
 <script>
-    export default {
-        data () {
-            return {}
-        }
+  export default {
+    data () {
+      return {}
+    },
+    methods: {
+      loginOut () {
+        this.$router.push('/login')
+      }
     }
+  }
 </script>
 
 <style scoped>

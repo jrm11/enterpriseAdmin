@@ -1,6 +1,6 @@
-<style>
-  @import "../assets/style/app.css";
-
+<style lang="scss" rel="stylesheet/scss">
+  @import "../assets/style/app";
+  @import "../assets/style/input";
   .index {
     display: flex;
     display: -webkit-flex;
@@ -58,31 +58,8 @@
   .el-tree-node__content {
     height: 40px;
   }
-  /*修改表单样式*/
-  .el-input__inner{
-    height: 34px;
-  }
-  .el-input__inner,.el-textarea__inner{
-    background-color: transparent;
-    border:none;
-    border-radius: 0;
-    box-shadow: 0 1px 0 #ddd;
-    transition: .3s;
-    padding:0;
-  }
-  .el-form-item__content{
-    line-height: 34px;
-  }
-  .el-form-item__label{
-    line-height: 24px;
-  }
-  .el-form-item{
-    margin-bottom:10px;
-  }
 
-  .el-input__inner:focus,.el-textarea__inner:focus {
-     box-shadow: 0 2px 0 #5b6f8c;
-   }
+
 
 </style>
 <template>

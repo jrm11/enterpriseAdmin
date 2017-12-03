@@ -4,12 +4,12 @@
       <span class="fl user-name">用户</span>
       <div v-if="addAction" style="display: inline-block">
         <el-button size="small" type="primary" @click="dialog = true">公用账号管理</el-button>
-        <el-button size="small" type="primary" @click="dialog= true">添加子公司</el-button>
-        <el-button size="small" type="primary" @click="dialog= true">添加部门</el-button>
-        <el-button size="small" type="primary" @click="dialog = true">添加成员</el-button>
+        <el-button size="small" type="primary" @click="addCompany= true">添加子公司</el-button>
+        <el-button size="small" type="primary" @click="addPardent= true">添加部门</el-button>
+        <el-button size="small" type="primary" @click="addStaff = true">添加成员</el-button>
       </div>
       <div v-else style="display: inline-block">
-        <el-button size="small" type="primary" @click="dialog= true">职员排序</el-button>
+        <el-button size="small" type="primary" @click="staffSort= true">职员排序</el-button>
         <el-button size="small" type="danger" @click="dialog= true">批量删除</el-button>
         <el-button size="small" type="primary" @click="dialog = true">批量移动</el-button>
       </div>
@@ -17,7 +17,7 @@
     </header>
 
     <!--添加子公司-->
-    <el-dialog title="添加子公司" :visible.sync="dialog" width="30%">
+    <el-dialog title="添加子公司" :visible.sync="addCompany" width="30%">
       <el-form>
         <el-form-item label="子公司名称：">
           <el-input auto-complete="off" placeholder="请输入子公司名称"></el-input>
@@ -48,13 +48,13 @@
           content="子公司可以指定管理员，该管理员可以独立的管理该子公司人员及部门。">
         </el-popover>
         <el-button class="fl" v-popover:popover1 style="border:none">子公司与部门的区别</el-button>
-        <el-button type="primary" @click="dialog = false">确 定</el-button>
+        <el-button type="primary" @click="addCompany = false">确 定</el-button>
       </div>
 
     </el-dialog>
 
     <!--添加部门-->
-    <el-dialog title="添加部门" :visible.sync="dialog" width="30%">
+    <el-dialog title="添加部门" :visible.sync="addPardent" width="30%">
       <el-form>
         <el-form-item label="部门名称：">
           <el-input auto-complete="off" placeholder="请输入部门名称"></el-input>
@@ -76,13 +76,13 @@
           content="子公司可以指定管理员，该管理员可以独立的管理该子公司人员及部门。">
         </el-popover>
         <el-button class="fl" v-popover:popover1 style="border:none">子公司与部门的区别</el-button>
-        <el-button type="primary" @click="dialog = false">确 定</el-button>
+        <el-button type="primary" @click="addPardent = false">确 定</el-button>
       </div>
 
     </el-dialog>
 
     <!--添加成员-->
-    <el-dialog title="添加成员" :visible.sync="dialog" width="40%">
+    <el-dialog title="添加成员" :visible.sync="addStaff" width="40%">
       <el-form>
         <el-form-item label="姓名：">
           <el-input auto-complete="off" placeholder="请输入子公司名称"></el-input>
@@ -145,8 +145,36 @@
           content="① 使用该员工的邮箱或手机号与密码（默认密码为 123456）登录。 ② 为该员工添加手机号码，即可在客户端使用手机+验证码的方式登录。">
         </el-popover>
         <el-button class="fl" v-popover:popover1 style="border:none">如何在客户端登录</el-button>
-        <el-button type="primary" @click="dialog = false">确 定</el-button>
+        <el-button type="primary" @click="addStaff = false">确 定</el-button>
       </div>
+    </el-dialog>
+
+
+    <!--职员排序-->
+    <el-dialog title="添加成员" :visible.sync="staffSort" width="40%">
+      <el-table
+        :data="tableData"
+        style="width: 100%"
+        :default-sort="{prop: 'date', order: 'descending'}"
+      >
+        <el-table-column
+          prop="date"
+          label="日期"
+          sortable>
+        </el-table-column>
+        <el-table-column
+          prop="name"
+          label="姓名"
+          sortable>
+        </el-table-column>
+        <el-table-column
+          prop="address"
+          label="地址"
+          :formatter="formatter">
+        </el-table-column>
+      </el-table>
+
+      <el-button type="primary" @click="staffSort = false">确 定</el-button>
     </el-dialog>
   </div>
 </template>
@@ -155,11 +183,31 @@
   export default {
     data () {
       return {
-        dialog: false,
+        addStaff: false,
+        addCompany: false,
+        addPardent: false,
+        staffSort: false,
         addAction: true,
         flag: false,
         batchText: '批量管理',
-        btnType: "danger"
+        btnType: "danger",
+        tableData: [{
+          date: '2016-05-02',
+          name: '王小虎1',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }, {
+          date: '2016-05-04',
+          name: '王小虎2',
+          address: '上海市普陀区金沙江路 1517 弄'
+        }, {
+          date: '2016-05-01',
+          name: '王小虎3',
+          address: '上海市普陀区金沙江路 1519 弄'
+        }, {
+          date: '2016-05-03',
+          name: '王小虎4',
+          address: '上海市普陀区金沙江路 1516 弄'
+        }]
       }
     },
     methods: {
@@ -175,8 +223,12 @@
           this.batchText = '批量管理'
           this.btnType = "danger"
         }
+      },
+      formatter(row, column) {
+        return row.address
       }
     }
+
   }
 </script>
 
@@ -190,8 +242,11 @@
     padding: 0 15px;
   }
 
-  .user-name   {
+  .user-name {
     font-size: 16px;
     font-weight: bold;
+  }
+  .el-table__row{
+    text-align: left;
   }
 </style>
