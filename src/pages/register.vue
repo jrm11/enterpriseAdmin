@@ -65,6 +65,7 @@
   </div>
 </template>
 <script>
+  import axios from 'axios'
   export default {
     data() {
       var checkAccount = function (rule, value, callback) {
@@ -124,10 +125,10 @@
       register(){
         this.$refs.registerForm.validate((valid)=> {
           if (valid) {
-            console.log(valid);
-            this.$router.push('/index')
-          } else {
-            return false;
+            let account = this.registerForm.account;
+            let email = this.registerForm.email;
+            let pwd = this.registerForm.pwd;
+            console.log(account, email, pwd);
           }
         })
       }

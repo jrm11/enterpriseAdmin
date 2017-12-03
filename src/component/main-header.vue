@@ -1,3 +1,20 @@
+<style lang="scss" scoped rel="stylesheet/scss">
+  @import "../assets/style/app";
+
+  .main-header {
+    height: 60px;
+    line-height: 60px;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+    text-align: right;
+    padding: 0 15px;
+  }
+
+  .user-name {
+    font-size: 16px;
+    font-weight: bold;
+  }
+</style>
 <template>
   <div>
     <header class="main-header">
@@ -151,10 +168,11 @@
 
 
     <!--职员排序-->
-    <el-dialog title="添加成员" :visible.sync="staffSort" width="40%">
+    <el-dialog title="职员排序" :visible.sync="staffSort" width="40%" class="clearfix tal" >
+      <h1 class="tal">公司</h1>
       <el-table
         :data="tableData"
-        style="width: 100%"
+        style="width: 100%;background: #999"
         :default-sort="{prop: 'date', order: 'descending'}"
       >
         <el-table-column
@@ -173,8 +191,9 @@
           :formatter="formatter">
         </el-table-column>
       </el-table>
-
-      <el-button type="primary" @click="staffSort = false">确 定</el-button>
+      <div class="tar mt30">
+        <el-button type="primary" @click="staffSort = false">确定</el-button>
+      </div>
     </el-dialog>
   </div>
 </template>
@@ -231,22 +250,3 @@
 
   }
 </script>
-
-<style>
-  .main-header {
-    height: 60px;
-    line-height: 60px;
-    background-color: #fff;
-    border-bottom: 1px solid #ddd;
-    text-align: right;
-    padding: 0 15px;
-  }
-
-  .user-name {
-    font-size: 16px;
-    font-weight: bold;
-  }
-  .el-table__row{
-    text-align: left;
-  }
-</style>
