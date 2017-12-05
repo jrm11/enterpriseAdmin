@@ -15,7 +15,7 @@
     margin: 0;
     padding: 0;
     background: url(assets/images/index.jpg);
-    overflow: hidden;
+    /*overflow: hidden;*/
   }
 
   #app {

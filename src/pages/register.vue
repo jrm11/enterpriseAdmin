@@ -65,7 +65,6 @@
   </div>
 </template>
 <script>
-  import axios from 'axios'
   export default {
     data() {
       var checkAccount = function (rule, value, callback) {

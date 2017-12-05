@@ -1,10 +1,9 @@
 <template>
   <header class="header">
-    <router-link to="/index">
       <img src="../assets/images/logo.png" alt="" class="fl">
       <img src="../assets/images/menu.svg" alt="" class="fl menu">
       <div class="fr">
-        <el-button>全屏</el-button>
+        <el-button @click="toBuyCar">购物车</el-button>
         <el-button><i class="el-icon-rank mr5"></i>部门排序</el-button>
         <el-button><i class="el-icon-download mr5"></i>导出</el-button>
         <el-button><i class="el-icon-upload2 mr5"></i>导入</el-button>
@@ -16,7 +15,6 @@
           </el-dropdown-menu>
         </el-dropdown>
       </div>
-    </router-link>
   </header>
 </template>
 
@@ -28,6 +26,9 @@
     methods: {
       loginOut () {
         this.$router.push('/login')
+      },
+      toBuyCar(){
+        this.$router.push('/buyCar')
       }
     }
   }
@@ -55,9 +56,5 @@
     flex: 0 0 60px;
   }
 
-  /*全屏图标*/
-  .screen-full {
-    margin-top: 14px;
-  }
 
 </style>

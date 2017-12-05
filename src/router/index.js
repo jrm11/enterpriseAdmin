@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import index from '@/pages/index'
 import login from '@/pages/login'
 import register from '@/pages/register'
+import buyCar from '@/pages/buyCar'
 
 Vue.use(Router)
 
@@ -22,6 +23,11 @@ export default new Router({
       path: '/register',
       name: 'register',
       component:register
+    },
+    {
+      path: '/buyCar',
+      name: 'buyCar',
+      component:buyCar
     },
   ]
 })
