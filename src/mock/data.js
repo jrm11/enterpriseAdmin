@@ -14,7 +14,7 @@ for (var i = 0; i < 8; i++) {
       "number|1-20": 20
     }),
     price:Mock.mock({
-      "number|1-100": 10000
+      "number|100-1000": 1000
     }),
   }));
 }
